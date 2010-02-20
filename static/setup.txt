@@ -1,0 +1,18 @@
+plugin.tx_jftabulatorsitemap_pi1 {
+	typeNum = {$plugin.tx_jftabulatorsitemap_pi1.typeNum}
+	jQueryNoConflict = {$plugin.tx_jftabulatorsitemap_pi1.jQueryNoConflict}
+	jQueryLibrary = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryLibrary}
+	jQueryEasing = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryEasing}
+	jQueryUI = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryUI}
+	jQueryUIstyle = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryUIstyle}
+}
+
+#tabs = PAGE
+#tabs {
+#  typeNum = 500
+#  10 < styles.content.get
+#  config {
+#    disableAllHeaderCode = 1
+#    xhtml_cleaning = 1
+#  }
+#}

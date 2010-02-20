@@ -1,0 +1,21 @@
+plugin.tx_jftabulatorsitemap_pi1 {
+
+	# cat=plugin.tx_jftabulatorsitemap/enable/010; type=int+; label=Used page type: Define the page type to use
+	typeNum = 500
+
+	# cat=plugin.tx_jftabulatorsitemap/enable/020; type=boolean; label=jQuery noConflict: Use jQuery in noConflict mode
+	jQueryNoConflict = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
+	file.jQueryLibrary = EXT:jftabulatorsitemap/res/jquery/js/jquery-1.3.2.min.js
+
+	# cat=plugin.tx_jftabulatorsitemap/file/030; type=file[js]; label=jQuery Easing: Location of the jQuery Easing
+	file.jQueryEasing = EXT:jftabulatorsitemap/res/jquery/js/jquery.easing-1.3.js
+
+	# cat=plugin.tx_jftabulatorsitemap/file/040; type=file[js]; label=jQuery UI: Location of the jQuery UI
+	file.jQueryUI = EXT:jftabulatorsitemap/res/jquery/js/jquery-ui-1.7.2.custom.min.js
+
+	# cat=plugin.tx_jftabulatorsitemap/file/050; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
+	file.jQueryUIstyle = EXT:jftabulatorsitemap/res/jquery/css/custom-theme/jquery-ui-1.7.2.custom.css
+}
+

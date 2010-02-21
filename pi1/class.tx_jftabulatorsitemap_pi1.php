@@ -64,6 +64,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		$menuPid = intval($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $GLOBALS['TSFE']->id);
 		$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', 'AND nav_hide=0', 1);
 
+		// Define the page type
 		if (is_numeric($this->conf['typeNum'])) {
 			$typeNum = array('type' => $this->conf['typeNum']);
 		} else {
@@ -98,6 +99,32 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		} else {
 			$this->addJsFile($this->conf['jQueryLibrary']);
 			$this->addJsFile($this->conf['jQueryUI']);
+		}
+
+		// Set FX for tab
+		$fx = array();
+		if ($this->conf['tabFxHeight']) {
+			$fx[] = "height:'toggle'";
+		}
+		if ($this->conf['tabFxOpacity']) {
+			$fx[] = "opacity:'toggle'";
+		}
+		if ($this->conf['tabFxDuration']) {
+			$fx[] = "duration:'{$this->conf['tabFxDuration']}'";
+		}
+		// Set options for tab
+		$options = array();
+		if (count($fx) > 0) {
+			$options[] = "fx:{".implode(",", $fx)."}";
+		}
+		if ($this->conf['tabCollapsible']) {
+			$options[] = "collapsible:true";
+		}
+		if ($this->conf['tabRandomTab']) {
+			$options[] = "selected:Math.floor(Math.random()*".count($menuItems_level1).")";
+		}
+		if ($this->conf['tabCache']) {
+			$options[] = "cache:true";
 		}
 
 		$this->addCssFile($this->conf['jQueryUIstyle']);

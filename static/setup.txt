@@ -1,6 +1,14 @@
 plugin.tx_jftabulatorsitemap_pi1 {
 	typeNum = {$plugin.tx_jftabulatorsitemap_pi1.typeNum}
 	jQueryNoConflict = {$plugin.tx_jftabulatorsitemap_pi1.jQueryNoConflict}
+
+	tabCollapsible = {$plugin.tx_jftabulatorsitemap_pi1.tabCollapsible}
+	tabRandomTab = {$plugin.tx_jftabulatorsitemap_pi1.tabRandomTab}
+	tabFxHeight = {$plugin.tx_jftabulatorsitemap_pi1.tabFxHeight}
+	tabFxOpacity = {$plugin.tx_jftabulatorsitemap_pi1.tabFxOpacity}
+	tabFxDuration = {$plugin.tx_jftabulatorsitemap_pi1.tabFxDuration}
+	tabCache = {$plugin.tx_jftabulatorsitemap_pi1.tabCache}
+
 	jQueryLibrary = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryEasing}
 	jQueryUI = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryUI}

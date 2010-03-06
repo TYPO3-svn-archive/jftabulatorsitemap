@@ -29,6 +29,10 @@
 
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
+if (t3lib_extMgm::isLoaded('t3jquery')) {
+	require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
+}
+
 /**
  * Plugin 'Tabulator Sitemap' for the 'jftabulatorsitemap' extension.
  *

@@ -6,23 +6,8 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/enable/020; type=boolean; label=jQuery noConflict: Use jQuery in noConflict mode
 	jQueryNoConflict = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/enable/030; type=boolean; label=Collapsible: Close tab if select the opened tab
-	tabCollapsible = 0
-
-	# cat=plugin.tx_jftabulatorsitemap/enable/040; type=boolean; label=Open random tab: Opens the tab randomly
-	tabRandomTab = 0
-
-	# cat=plugin.tx_jftabulatorsitemap/enable/050; type=boolean; label=FX height: Use the height effect to change the tab panel
-	tabFxHeight = 0
-
-	# cat=plugin.tx_jftabulatorsitemap/enable/060; type=boolean; label=FX opacity: Use the opacity effect to change the tab panel
-	tabFxOpacity = 0
-
-	# cat=plugin.tx_jftabulatorsitemap/enable/070; type=options[slow,normal,fast]; label=FX duration: Define the animation speed for changing tab panel
-	tabFxDuration = normal
-
-	# cat=plugin.tx_jftabulatorsitemap/enable/080; type=boolean; label=Cache enabled: Use cache for ajax requests
-	tabCache = 0
+	# cat=plugin.tx_jftabulatorsitemap/enable/030; type=boolean; label=Javascript in Footer: If set, the Javascript will be rendered in Footer
+	jsInFooter = 0
 
 
 	# cat=plugin.tx_jftabulatorsitemap/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
@@ -36,5 +21,24 @@ plugin.tx_jftabulatorsitemap_pi1 {
 
 	# cat=plugin.tx_jftabulatorsitemap/file/050; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
 	file.jQueryUIstyle = EXT:jftabulatorsitemap/res/jquery/css/custom-theme/jquery-ui-1.7.2.custom.css
+
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/010; type=boolean; label=Collapsible: Close tab if select the opened tab
+	tabCollapsible = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/020; type=boolean; label=Open random tab: Opens the tab randomly
+	tabRandomTab = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/030; type=boolean; label=FX height: Use the height effect to change the tab panel
+	tabFxHeight = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/040; type=boolean; label=FX opacity: Use the opacity effect to change the tab panel
+	tabFxOpacity = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/050; type=options[slow,normal,fast]; label=FX duration: Define the animation speed for changing tab panel
+	tabFxDuration = normal
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/060; type=boolean; label=Cache enabled: Use cache for ajax requests
+	tabCache = 0
 }
 

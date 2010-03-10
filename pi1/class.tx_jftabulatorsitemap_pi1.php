@@ -66,7 +66,12 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		// define the key of the element
 		$this->contentKey = "jftabulatorsitemap_c" . $this->cObj->data['uid'];
 		$menuPid = intval($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $GLOBALS['TSFE']->id);
-		$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', 'AND nav_hide=0', 1);
+		// define the select hidden / nav_hide
+		$select = array();
+		if (! $this->conf['showNavHidePages']) {
+			$select[] = 'AND nav_hide=0';
+		}
+		$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
 
 		// Define the page type
 		if (is_numeric($this->conf['typeNum'])) {

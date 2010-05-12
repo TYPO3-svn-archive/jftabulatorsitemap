@@ -9,7 +9,10 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/enable/030; type=boolean; label=Javascript in Footer: If set, the Javascript will be rendered in Footer
 	jsInFooter = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/enable/040; type=boolean; label=Show nav_hide pages: Show pages even if hidden for navigation (Hide in menu)
+	# cat=plugin.tx_jftabulatorsitemap/enable/040; type=boolean; label=Minify Javascript: If set, the Javascript will be minified
+	jsMinify = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/enable/050; type=boolean; label=Show nav_hide pages: Show pages even if hidden for navigation (Hide in menu)
 	showNavHidePages = 0
 
 

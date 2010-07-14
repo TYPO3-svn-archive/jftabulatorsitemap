@@ -103,13 +103,6 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			$this->addJS(chr(10)."jQuery.noConflict();");
 		}
 
-		if (T3JQUERY === true) {
-			tx_t3jquery::addJqJS();
-		} else {
-			$this->addJsFile($this->conf['jQueryLibrary']);
-			$this->addJsFile($this->conf['jQueryUI']);
-		}
-
 		// Set FX for tab
 		$fx = array();
 		if ($this->conf['tabFxHeight']) {
@@ -156,15 +149,31 @@ jQuery(document).ready(function() {
 	 */
 	function addResources()
 	{
+		// checks if t3jquery is loaded
+		if (T3JQUERY === true) {
+			tx_t3jquery::addJqJS();
+		} else {
+			$this->addJsFile($this->conf['jQueryLibrary'], true);
+			$this->addJsFile($this->conf['jQueryUI']);
+		}
+		// Fix moveJsFromHeaderToFooter (add all scripts to the footer)
+		if ($GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter']) {
+			$allJsInFooter = true;
+		} else {
+			$allJsInFooter = false;
+		}
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {
-					foreach ($this->jsFiles as $jsToLoad) {
+			foreach ($this->jsFiles as $jsToLoad) {
 				if (T3JQUERY === true) {
-					tx_t3jquery::addJS('', array('jsfile' => $this->getPath($jsToLoad)));
+					tx_t3jquery::addJS('', array('jsfile' => $jsToLoad));
 				} else {
 					// Add script only once
-					if (! preg_match("/".preg_quote($this->getPath($jsToLoad), "/")."/", $GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey])) {
-						$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey] .= ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) :'');
+					$hash = md5($this->getPath($jsToLoad));
+					if ($allJsInFooter) {
+						$GLOBALS['TSFE']->additionalFooterData['jsFile_'.$this->extKey.'_'.$hash] = ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) : '');
+					} else {
+						$GLOBALS['TSFE']->additionalHeaderData['jsFile_'.$this->extKey.'_'.$hash] = ($this->getPath($jsToLoad) ? '<script src="'.$this->getPath($jsToLoad).'" type="text/javascript"></script>'.chr(10) : '');
 					}
 				}
 			}
@@ -180,15 +189,10 @@ jQuery(document).ready(function() {
 			$conf = array();
 			$conf['jsdata'] = $temp_js;
 			if (T3JQUERY === true && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
-				if ($this->conf['jsInFooter']) {
-					$conf['tofooter'] = true;
-					tx_t3jquery::addJS('', $conf);
-				} else {
-					$conf['tofooter'] = false;
-					tx_t3jquery::addJS('', $conf);
-				}
+				$conf['tofooter'] = ($this->conf['jsInFooter']);
+				tx_t3jquery::addJS('', $conf);
 			} else {
-				if ($this->conf['jsInFooter']) {
+				if ($this->conf['jsInFooter'] || $allJsInFooter) {
 					$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
 				} else {
 					$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey] .= t3lib_div::wrapJS($temp_js, true);
@@ -199,12 +203,11 @@ jQuery(document).ready(function() {
 		if (count($this->cssFiles) > 0) {
 			foreach ($this->cssFiles as $cssToLoad) {
 				// Add script only once
-				if (! preg_match("/".preg_quote($this->getPath($cssToLoad), "/")."/", $GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey])) {
-					$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey] .= ($this->getPath($cssToLoad) ? '<link rel="stylesheet" href="'.$this->getPath($cssToLoad).'" type="text/css" />'.chr(10) :'');
-				}
+				$hash = md5($this->getPath($cssToLoad));
+				$GLOBALS['TSFE']->additionalHeaderData['cssFile_'.$this->extKey.'_'.$hash] = ($this->getPath($cssToLoad) ? '<link rel="stylesheet" href="'.$this->getPath($cssToLoad).'" type="text/css" />'.chr(10) :'');
 			}
 		}
-		// add all defined CSS script
+		// add all defined CSS Script
 		if (count($this->css) > 0) {
 			foreach ($this->css as $cssToPut) {
 				$temp_css .= $cssToPut;

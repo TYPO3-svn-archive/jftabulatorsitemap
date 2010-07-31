@@ -16,6 +16,24 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabFxOpacity = {$plugin.tx_jftabulatorsitemap_pi1.tabFxOpacity}
 	tabFxDuration = {$plugin.tx_jftabulatorsitemap_pi1.tabFxDuration}
 	tabCache = {$plugin.tx_jftabulatorsitemap_pi1.tabCache}
+
+	tabItem = TEXT
+	tabItem {
+		typolink {
+			parameter.data = register:uid
+			additionalParams = &type={$plugin.tx_jftabulatorsitemap_pi1.typeNum}
+			addQueryString = 1
+			addQueryString.exclude = id
+		}
+	}
+	tabWrap {
+		dataWrap = <li> | </li>
+		required = 1
+	}
+	stdWrap {
+		dataWrap = <div id="{register:key}"><ul> | </ul></div>
+		required = 1
+	}
 }
 
 # Request the page via AJAX

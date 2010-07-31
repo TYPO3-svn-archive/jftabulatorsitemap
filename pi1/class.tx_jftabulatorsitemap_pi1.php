@@ -62,7 +62,6 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	function main($content, $conf)
 	{
 		$this->conf = $conf;
-
 		// define the key of the element
 		$this->contentKey = "jftabulatorsitemap_c" . $this->cObj->data['uid'];
 		$menuPid = intval($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $GLOBALS['TSFE']->id);
@@ -73,34 +72,28 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		}
 		$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
 
-		// Define the page type
-		if (is_numeric($this->conf['typeNum'])) {
-			$typeNum = array('type' => $this->conf['typeNum']);
-		} else {
-			$typeNum = array();
-		}
-		$tRows = array();
 		reset($menuItems_level1);
+
+		$items = null;
 		while(list($uid, $pages_row) = each($menuItems_level1)) {
-			$tRows[] = '
-		<li>'.
-			$this->pi_linkToPage(
-				$pages_row['nav_title'] ? $pages_row['nav_title'] : $pages_row['title'],
-				$pages_row['uid'],
-				$pages_row['target'],
-				$typeNum
-			).
-		'</li>';
+			$GLOBALS['TSFE']->register['key']    = $this->contentKey;
+			$GLOBALS['TSFE']->register['uid']    = $pages_row['uid'];
+			$GLOBALS['TSFE']->register['target'] = $pages_row['target'];
+			$item   = trim($this->cObj->cObjGetSingle($this->conf['tabItem'], $this->conf['tabItem.']));
+			$items .= $this->cObj->stdWrap($item, $this->conf['tabWrap.']);
 		}
-		$totalMenu = '
-<div id="'.$this->contentKey.'">
-	<ul>'.implode('', $tRows).'
-	</ul>
-</div>';
+		$content = $this->cObj->stdWrap($items, $this->conf['stdWrap.']);
 
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
-			$this->addJS(chr(10)."jQuery.noConflict();");
+			$jQueryNoConflict = "jQuery.noConflict();";
+		} else {
+			$jQueryNoConflict = "";
+		}
+		
+		// define the jQuery mode and function
+		if ($this->conf['jQueryNoConflict']) {
+			$this->addJS("jQuery.noConflict();");
 		}
 
 		// Set FX for tab
@@ -138,7 +131,7 @@ jQuery(document).ready(function() {
 		// Add the ressources
 		$this->addResources();
 
-		return $totalMenu;
+		return $this->pi_wrapInBaseClass($content);
 	}
 
 

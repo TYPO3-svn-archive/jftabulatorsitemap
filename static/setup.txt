@@ -20,10 +20,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabItem = TEXT
 	tabItem {
 		typolink {
-			parameter.data = register:uid
-			additionalParams = &type={$plugin.tx_jftabulatorsitemap_pi1.typeNum}
-			addQueryString = 1
-			addQueryString.exclude = id
+			parameter.dataWrap = {register:uid},{$plugin.tx_jftabulatorsitemap_pi1.typeNum}
 		}
 	}
 	tabWrap {

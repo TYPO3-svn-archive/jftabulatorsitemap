@@ -10,6 +10,7 @@ t3lib_extMgm::addPlugin(array(
 ),'menu_type');
 
 
-t3lib_extMgm::addStaticFile($_EXTKEY,'static/', 'Tabulator Sitemap');
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/',      'Tabulator Sitemap');
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/ajax/', 'Tabulator Sitemap AJAX');
 
 ?>

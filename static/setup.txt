@@ -17,6 +17,8 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabFxDuration = {$plugin.tx_jftabulatorsitemap_pi1.tabFxDuration}
 	tabCache = {$plugin.tx_jftabulatorsitemap_pi1.tabCache}
 
+	scrollSpeed = {$plugin.tx_jftabulatorsitemap_pi1.scrollSpeed}
+
 	tabItem = TEXT
 	tabItem {
 		typolink {
@@ -33,13 +35,3 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	}
 }
 
-# Request the page via AJAX
-#tabs = PAGE
-#tabs {
-#  typeNum = {$plugin.tx_jftabulatorsitemap_pi1.typeNum}
-#  10 < styles.content.get
-#  config {
-#    disableAllHeaderCode = 1
-#    xhtml_cleaning = 1
-#  }
-#}

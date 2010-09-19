@@ -62,13 +62,20 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	function main($content, $conf)
 	{
 		$this->conf = $conf;
+
 		// define the key of the element
 		$this->contentKey = "jftabulatorsitemap_c" . $this->cObj->data['uid'];
+
 		$menuPid = intval($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $GLOBALS['TSFE']->id);
+
 		// define the select hidden / nav_hide
 		$select = array();
 		if (! $this->conf['showNavHidePages']) {
 			$select[] = 'AND nav_hide=0';
+		}
+		$doktypes = t3lib_div::intExplode(',', $this->conf['showDoktypes'], true);
+		if (count($doktypes) > 0) {
+			$select[] = 'AND doktype IN ('.implode(',', $doktypes).')';
 		}
 		$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
 
@@ -90,11 +97,6 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		} else {
 			$jQueryNoConflict = "";
 		}
-		
-		// define the jQuery mode and function
-		if ($this->conf['jQueryNoConflict']) {
-			$this->addJS("jQuery.noConflict();");
-		}
 
 		// Set FX for tab
 		$fx = array();
@@ -104,8 +106,8 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		if ($this->conf['tabFxOpacity']) {
 			$fx[] = "opacity:'toggle'";
 		}
-		if ($this->conf['tabFxDuration']) {
-			$fx[] = "duration:'{$this->conf['tabFxDuration']}'";
+		if ($this->conf['tabFxDuration'] || is_numeric($this->conf['tabFxDuration'])) {
+			$fx[] = "duration:".(is_numeric($this->conf['tabFxDuration']) ? $this->conf['tabFxDuration'] : "'{$this->conf['tabFxDuration']}'");
 		}
 		// Set options for tab
 		$options = array();
@@ -123,7 +125,8 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		}
 
 		$this->addCssFile($this->conf['jQueryUIstyle']);
-		$this->addJS("
+
+		$this->addJS($jQueryNoConflict . "
 jQuery(document).ready(function() {
 	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "")."){$rotate};
 });");

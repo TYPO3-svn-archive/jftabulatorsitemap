@@ -15,6 +15,9 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/enable/050; type=boolean; label=Show nav_hide pages: Show pages even if hidden for navigation (Hide in menu)
 	showNavHidePages = 0
 
+	# cat=plugin.tx_jftabulatorsitemap/enable/060; type=string; label=Show doctypes: Comma separated list with all allowed doctypes (1=Standard, 2=Advanced, 3=External URL, 4=Shortcut, 5=Not in menu, 6=Backend User Section, 199=Spacer, 254=SysFolder, 255=Recycler)
+	showDoktypes = 1,2
+
 
 
 	# cat=plugin.tx_jftabulatorsitemap/file/010; type=file[js]; label=jQuery Library: Location of the jQuery Lib
@@ -43,7 +46,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/typo/040; type=boolean; label=FX opacity: Use the opacity effect to change the tab panel
 	tabFxOpacity = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/050; type=options[slow,normal,fast]; label=FX duration: Define the animation speed for changing tab panel
+	# cat=plugin.tx_jftabulatorsitemap/typo/050; type=string; label=FX duration: Define the animation speed for changing tab panel
 	tabFxDuration = normal
 
 	# cat=plugin.tx_jftabulatorsitemap/typo/060; type=boolean; label=Cache enabled: Use cache for ajax requests
@@ -51,7 +54,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 
 
 
-	# cat=plugin.tx_jftabulatorsitemap/dims/010; type=int+; label=Scroll speed: Scroll speed for toTop-link in ms
+	# cat=plugin.tx_jftabulatorsitemap/dims/010; type=string; label=Scroll speed: Scroll speed for toTop-link in ms
 	scrollSpeed = 500
 }
 

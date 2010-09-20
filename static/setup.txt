@@ -17,6 +17,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabFxOpacity = {$plugin.tx_jftabulatorsitemap_pi1.tabFxOpacity}
 	tabFxDuration = {$plugin.tx_jftabulatorsitemap_pi1.tabFxDuration}
 	tabCache = {$plugin.tx_jftabulatorsitemap_pi1.tabCache}
+	tabPreload = {$plugin.tx_jftabulatorsitemap_pi1.tabPreload}
 
 	scrollSpeed = {$plugin.tx_jftabulatorsitemap_pi1.scrollSpeed}
 

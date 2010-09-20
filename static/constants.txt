@@ -52,6 +52,9 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/typo/060; type=boolean; label=Cache enabled: Use cache for ajax requests
 	tabCache = 0
 
+	# cat=plugin.tx_jftabulatorsitemap/typo/070; type=boolean; label=Preload tabs: Preload all tabs at document ready
+	tabPreload = 0
+
 
 
 	# cat=plugin.tx_jftabulatorsitemap/dims/010; type=string; label=Scroll speed: Scroll speed for toTop-link in ms

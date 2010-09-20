@@ -123,12 +123,20 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		if ($this->conf['tabCache']) {
 			$options[] = "cache:true";
 		}
+		$tabPreload = null;
+		if ($this->conf['tabPreload']) {
+			$options[] = "ajaxOptions:{async:false}";
+			$tabPreload = "
+	for (var tabi=0; jQuery('#{$this->contentKey}').tabs('length') > tabi ; tabi++) {
+		jQuery('#{$this->contentKey}').tabs('load',tabi);
+	}";
+		}
 
 		$this->addCssFile($this->conf['jQueryUIstyle']);
 
 		$this->addJS($jQueryNoConflict . "
 jQuery(document).ready(function() {
-	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "")."){$rotate};
+	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$tabPreload}
 });");
 
 		// Add the ressources

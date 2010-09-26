@@ -3,6 +3,8 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	jQueryNoConflict = {$plugin.tx_jftabulatorsitemap_pi1.jQueryNoConflict}
 	jsInFooter = {$plugin.tx_jftabulatorsitemap_pi1.jsInFooter}
 	jsMinify = {$plugin.tx_jftabulatorsitemap_pi1.jsMinify}
+	jsInline = {$plugin.tx_jftabulatorsitemap_pi1.jsInline}
+	cssMinify = {$plugin.tx_jftabulatorsitemap_pi1.cssMinify}
 	showNavHidePages = {$plugin.tx_jftabulatorsitemap_pi1.showNavHidePages}
 	showDoktypes = {$plugin.tx_jftabulatorsitemap_pi1.showDoktypes}
 

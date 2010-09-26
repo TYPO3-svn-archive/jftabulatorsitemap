@@ -12,10 +12,16 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/enable/040; type=boolean; label=Minify Javascript: If set, the Javascript will be minified
 	jsMinify = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/enable/050; type=boolean; label=Show nav_hide pages: Show pages even if hidden for navigation (Hide in menu)
+	# cat=plugin.tx_jftabulatorsitemap/enable/050; type=boolean; label=Javascript to Inline: If set, the Javascript will be inserted into the inlineJS, after this, its possible to put it into externel files (config.removeDefaultJS = external)
+	jsInline = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/enable/060; type=boolean; label=Minify CSS: If set, the CSS will be minified
+	cssMinify = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/enable/070; type=boolean; label=Show nav_hide pages: Show pages even if hidden for navigation (Hide in menu)
 	showNavHidePages = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/enable/060; type=string; label=Show doctypes: Comma separated list with all allowed doctypes (1=Standard, 2=Advanced, 3=External URL, 4=Shortcut, 5=Not in menu, 6=Backend User Section, 199=Spacer, 254=SysFolder, 255=Recycler)
+	# cat=plugin.tx_jftabulatorsitemap/enable/080; type=string; label=Show doctypes: Comma separated list with all allowed doctypes (1=Standard, 2=Advanced, 3=External URL, 4=Shortcut, 5=Not in menu, 6=Backend User Section, 199=Spacer, 254=SysFolder, 255=Recycler)
 	showDoktypes = 1,2
 
 

@@ -7,6 +7,15 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tt_content.menu_type_pi1">Tabulator Sitemap</label>
+			<label index="spinner_text">Loading...</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tt_content.menu_type_pi1">Tabulator Sitemap</label>
+			<label index="spinner_text">Laden...</label>
 		</languageKey>
 	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
 </T3locallang>

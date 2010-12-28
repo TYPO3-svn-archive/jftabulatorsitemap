@@ -131,20 +131,30 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		jQuery('#{$this->contentKey}').tabs('load',tabi);
 	}";
 		}
+		if ($this->conf['tabShowSpinner']) {
+			$options[] = "spinner:'".t3lib_div::slashJS(trim($this->cObj->cObjGetSingle($this->conf['tabSpinner'], $this->conf['tabSpinner.'])))."'";
+		} else {
+			$options[] = "spinner:''";
+		}
 
 		$this->addCssFile($this->conf['jQueryUIstyle']);
 
-		$this->addJS($jQueryNoConflict . "
+		// If the request comes via AJAX, the JS will be added to the content
+		if ($this->isAjax()) {
+			$content .= t3lib_div::wrapJS("
+	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$tabPreload}");
+		} else {
+			$this->addJS($jQueryNoConflict . "
 jQuery(document).ready(function() {
 	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$tabPreload}
 });");
+		}
 
 		// Add the ressources
 		$this->addResources();
 
 		return $this->pi_wrapInBaseClass($content);
 	}
-
 
 	/**
 	 * Include all defined resources (JS / CSS)
@@ -349,6 +359,15 @@ jQuery(document).ready(function() {
 		$_EXTKEY = $key;
 		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
 		return $EM_CONF[$key]['version'];
+	}
+
+	/**
+	 * Returns true, if the request comes via AJAX
+	 * @return boolean
+	 */
+	function isAjax()
+	{
+		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 	}
 }
 

@@ -21,12 +21,21 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabCache = {$plugin.tx_jftabulatorsitemap_pi1.tabCache}
 	tabPreload = {$plugin.tx_jftabulatorsitemap_pi1.tabPreload}
 
+	tabShowSpinner = {$plugin.tx_jftabulatorsitemap_pi1.tabShowSpinner}
+	tabSpinner = TEXT
+	tabSpinner {
+		data = LLL:EXT:jftabulatorsitemap/locallang_db.xml:spinner_text
+		wrap = <em> | </em>
+	}
+
 	scrollSpeed = {$plugin.tx_jftabulatorsitemap_pi1.scrollSpeed}
 
 	tabItem = TEXT
 	tabItem {
 		typolink {
 			parameter.dataWrap = {register:uid},{$plugin.tx_jftabulatorsitemap_pi1.typeNum}
+			ATagBeforeWrap = 1
+			wrap = <span> | </span>
 		}
 	}
 	tabWrap {

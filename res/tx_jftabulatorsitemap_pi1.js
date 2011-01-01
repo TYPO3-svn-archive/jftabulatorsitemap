@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
 		###OPTIONS###
 	});
 	<!-- ###PANEL_SPINNER### begin -->
-	jQuery('####KEY###').bind("tabsload", function(event, ui) {
+	jQuery('####KEY###').bind("tabsshow", function(event, ui) {
 		jQuery(".tab-loading").remove();
 	});
 	jQuery('####KEY###').bind("tabsselect", function(event, ui) {

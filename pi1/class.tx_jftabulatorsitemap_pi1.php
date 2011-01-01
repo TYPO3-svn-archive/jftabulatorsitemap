@@ -170,7 +170,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 
 		// If the request comes via AJAX, the JS will be added to the content
 		if ($this->isAjax()) {
-			$content .= $jQueryNoConflict . $templateCode;
+			$content .= t3lib_div::wrapJS($jQueryNoConflict . $templateCode);
 		} else {
 			$this->addJS($jQueryNoConflict . $templateCode);
 		}

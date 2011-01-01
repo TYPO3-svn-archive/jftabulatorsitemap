@@ -8,6 +8,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	showNavHidePages = {$plugin.tx_jftabulatorsitemap_pi1.showNavHidePages}
 	showDoktypes = {$plugin.tx_jftabulatorsitemap_pi1.showDoktypes}
 
+	templateFileJS = {$plugin.tx_jftabulatorsitemap_pi1.file.templateFileJS}
 	jQueryLibrary = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryLibrary}
 	jQueryEasing = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryEasing}
 	jQueryUI = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryUI}
@@ -27,6 +28,8 @@ plugin.tx_jftabulatorsitemap_pi1 {
 		data = LLL:EXT:jftabulatorsitemap/locallang_db.xml:spinner_text
 		wrap = <em> | </em>
 	}
+	spinnerPanel = {$plugin.tx_jftabulatorsitemap_pi1.spinnerPanel}
+	spinnerPanelPosition = {$plugin.tx_jftabulatorsitemap_pi1.spinnerPanelPosition}
 
 	scrollSpeed = {$plugin.tx_jftabulatorsitemap_pi1.scrollSpeed}
 

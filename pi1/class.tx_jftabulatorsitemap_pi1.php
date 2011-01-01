@@ -42,15 +42,16 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
  */
 class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 {
-	var $prefixId      = 'tx_jftabulatorsitemap_pi1';		// Same as class name
-	var $scriptRelPath = 'pi1/class.tx_jftabulatorsitemap_pi1.php';	// Path to this script relative to the extension dir.
-	var $extKey        = 'jftabulatorsitemap';	// The extension key.
-	var $pi_checkCHash = true;
-	var $contentKey = null;
-	var $jsFiles = array();
-	var $js = array();
-	var $cssFiles = array();
-	var $css = array();
+	public $prefixId      = 'tx_jftabulatorsitemap_pi1';		// Same as class name
+	public $scriptRelPath = 'pi1/class.tx_jftabulatorsitemap_pi1.php';	// Path to this script relative to the extension dir.
+	public $extKey        = 'jftabulatorsitemap';	// The extension key.
+	public $pi_checkCHash = true;
+	private $contentKey = null;
+	private $templateFileJS = null;
+	private $jsFiles = array();
+	private $js = array();
+	private $cssFiles = array();
+	private $css = array();
 
 	/**
 	 * The main method of the PlugIn
@@ -59,12 +60,17 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	The content that is displayed on the website (Menu)
 	 */
-	function main($content, $conf)
+	public function main($content, $conf)
 	{
 		$this->conf = $conf;
 
 		// define the key of the element
 		$this->contentKey = "jftabulatorsitemap_c" . $this->cObj->data['uid'];
+
+		// The template for JS
+		if (! $this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS'])) {
+			$this->templateFileJS = $this->cObj->fileResource("EXT:jftabulatorsitemap/res/tx_jftabulatorsitemap_pi1.js");
+		}
 
 		$menuPid = intval($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $GLOBALS['TSFE']->id);
 
@@ -101,53 +107,72 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		// Set FX for tab
 		$fx = array();
 		if ($this->conf['tabFxHeight']) {
-			$fx[] = "height:'toggle'";
+			$fx[] = "height: 'toggle'";
 		}
 		if ($this->conf['tabFxOpacity']) {
-			$fx[] = "opacity:'toggle'";
+			$fx[] = "opacity: 'toggle'";
 		}
 		if ($this->conf['tabFxDuration'] || is_numeric($this->conf['tabFxDuration'])) {
-			$fx[] = "duration:".(is_numeric($this->conf['tabFxDuration']) ? $this->conf['tabFxDuration'] : "'{$this->conf['tabFxDuration']}'");
+			$fx[] = "duration: ".(is_numeric($this->conf['tabFxDuration']) ? $this->conf['tabFxDuration'] : "'{$this->conf['tabFxDuration']}'");
 		}
 		// Set options for tab
 		$options = array();
 		if (count($fx) > 0) {
-			$options[] = "fx:{".implode(",", $fx)."}";
+			$options[] = "fx: {".implode(",", $fx)."}";
 		}
 		if ($this->conf['tabCollapsible']) {
-			$options[] = "collapsible:true";
+			$options['collapsible'] = "collapsible: true";
 		}
 		if ($this->conf['tabRandomTab']) {
-			$options[] = "selected:Math.floor(Math.random()*".count($menuItems_level1).")";
+			$options['selected'] = "selected: Math.floor(Math.random()*".count($menuItems_level1).")";
 		}
 		if ($this->conf['tabCache']) {
-			$options[] = "cache:true";
+			$options['cache'] = "cache: true";
 		}
+		$spinner = t3lib_div::slashJS(trim($this->cObj->cObjGetSingle($this->conf['tabSpinner'], $this->conf['tabSpinner.'])));
+		if ($this->conf['tabShowSpinner']) {
+			$options['spinner'] = "spinner: '".$spinner."'";
+		} else {
+			$options['spinner'] = "spinner: ''";
+		}
+
+		// get the Template of the Javascript
+		$markerArray = array();
+		// get the template
+		if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
+			$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", true);
+		}
+
+		// TAB_PRELOAD
 		$tabPreload = null;
 		if ($this->conf['tabPreload']) {
-			$options[] = "ajaxOptions:{async:false}";
-			$tabPreload = "
-	for (var tabi=0; jQuery('#{$this->contentKey}').tabs('length') > tabi ; tabi++) {
-		jQuery('#{$this->contentKey}').tabs('load',tabi);
-	}";
+			$options['ajaxOptions'] = "ajaxOptions: {async: false}";
+			$tabPreload = trim($this->cObj->getSubpart($templateCode, "###TAB_PRELOAD###"));
 		}
-		if ($this->conf['tabShowSpinner']) {
-			$options[] = "spinner:'".t3lib_div::slashJS(trim($this->cObj->cObjGetSingle($this->conf['tabSpinner'], $this->conf['tabSpinner.'])))."'";
-		} else {
-			$options[] = "spinner:''";
+		$templateCode = $this->cObj->substituteSubpart($templateCode, '###TAB_PRELOAD###', $tabPreload, 0);
+
+		// PANEL_SPINNER
+		$spinnerPanel = null;
+		if ($this->conf['spinnerPanel']) {
+			$options['ajaxOptions'] = "ajaxOptions: {async: false}";
+			$options['spinnerPanel'] = "spinnerPanel: '".$spinner."'";
+			$spinnerPanel = trim($this->cObj->getSubpart($templateCode, "###PANEL_SPINNER###"));
 		}
+		$templateCode = $this->cObj->substituteSubpart($templateCode, '###PANEL_SPINNER###', $spinnerPanel, 0);
+
+		// Replace default values
+		$markerArray["KEY"]     = $this->contentKey;
+		$markerArray["OPTIONS"] = implode(", ", $options);
+		$markerArray["SPINNER_PANEL_POSITION"] = ($this->conf['spinnerPanelPosition'] ? $this->conf['spinnerPanelPosition'] : 'prepend');
+		$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 
 		$this->addCssFile($this->conf['jQueryUIstyle']);
 
 		// If the request comes via AJAX, the JS will be added to the content
 		if ($this->isAjax()) {
-			$content .= t3lib_div::wrapJS("
-	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$tabPreload}");
+			$content .= $jQueryNoConflict . $templateCode;
 		} else {
-			$this->addJS($jQueryNoConflict . "
-jQuery(document).ready(function() {
-	jQuery('#{$this->contentKey}').tabs(".(count($options) ? "{".implode(", ", $options)."}" : "").");{$tabPreload}
-});");
+			$this->addJS($jQueryNoConflict . $templateCode);
 		}
 
 		// Add the ressources
@@ -161,7 +186,7 @@ jQuery(document).ready(function() {
 	 *
 	 * @return void
 	 */
-	function addResources()
+	private function addResources()
 	{
 		// checks if t3jquery is loaded
 		if (T3JQUERY === true) {
@@ -284,7 +309,7 @@ jQuery(document).ready(function() {
 	 * @param string $path
 	 * return string
 	 */
-	function getPath($path="")
+	private function getPath($path="")
 	{
 		return $GLOBALS['TSFE']->tmpl->getFileName($path);
 	}
@@ -296,7 +321,7 @@ jQuery(document).ready(function() {
 	 * @param boolean $first
 	 * @return void
 	 */
-	function addJsFile($script="", $first=false)
+	private function addJsFile($script="", $first=false)
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
 			if ($first === true) {
@@ -313,7 +338,7 @@ jQuery(document).ready(function() {
 	 * @param string $script
 	 * @return void
 	 */
-	function addJS($script="")
+	private function addJS($script="")
 	{
 		if (! in_array($script, $this->js)) {
 			$this->js[] = $script;
@@ -326,7 +351,7 @@ jQuery(document).ready(function() {
 	 * @param string $script
 	 * @return void
 	 */
-	function addCssFile($script="")
+	private function addCssFile($script="")
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->cssFiles)) {
 			$this->cssFiles[] = $script;
@@ -339,7 +364,7 @@ jQuery(document).ready(function() {
 	 * @param string $script
 	 * @return void
 	 */
-	function addCSS($script="")
+	private function addCSS($script="")
 	{
 		if (! in_array($script, $this->css)) {
 			$this->css[] = $script;
@@ -351,7 +376,7 @@ jQuery(document).ready(function() {
 	 * @param string $key
 	 * @return string
 	 */
-	function getExtensionVersion($key)
+	private function getExtensionVersion($key)
 	{
 		if (! t3lib_extMgm::isLoaded($key)) {
 			return '';
@@ -361,11 +386,28 @@ jQuery(document).ready(function() {
 		return $EM_CONF[$key]['version'];
 	}
 
+
+	/**
+	 * Return a errormessage if needed
+	 * @param string $msg
+	 * @param boolean $js
+	 * @return string
+	 */
+	private function outputError($msg='', $js=false)
+	{
+		t3lib_div::devLog($msg, $this->extKey, 3);
+		if ($this->confArr['frontendErrorMsg'] || ! isset($this->confArr['frontendErrorMsg'])) {
+			return ($js ? "alert(".t3lib_div::quoteJSvalue($msg).")" : "<p>{$msg}</p>");
+		} else {
+			return null;
+		}
+	}
+
 	/**
 	 * Returns true, if the request comes via AJAX
 	 * @return boolean
 	 */
-	function isAjax()
+	private function isAjax()
 	{
 		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 	}

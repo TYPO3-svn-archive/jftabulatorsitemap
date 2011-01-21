@@ -1,2 +1,2 @@
 script=
-components=Core,Tabs
+components=Core,Tabs,EffectsCore

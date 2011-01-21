@@ -36,41 +36,44 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	file.jQueryEasing = EXT:jftabulatorsitemap/res/jquery/js/jquery.easing-1.3.js
 
 	# cat=plugin.tx_jftabulatorsitemap/file/040; type=file[js]; label=jQuery UI: Location of the jQuery UI
-	file.jQueryUI = EXT:jftabulatorsitemap/res/jquery/js/jquery-ui-1.8.custom.min.js
+	file.jQueryUI = EXT:jftabulatorsitemap/res/jquery/js/jquery-ui-1.8.9.custom.min.js
 
 	# cat=plugin.tx_jftabulatorsitemap/file/050; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
-	file.jQueryUIstyle = EXT:jftabulatorsitemap/res/jquery/css/theme-1.8/jquery-ui-1.8.custom.css
+	file.jQueryUIstyle = EXT:jftabulatorsitemap/res/jquery/css/theme-1.8.9/jquery-ui-1.8.9.custom.css
 
 
 
 	# cat=plugin.tx_jftabulatorsitemap/typo/010; type=boolean; label=Collapsible: Close tab if select the opened tab
 	tabCollapsible = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/020; type=boolean; label=Open random tab: Opens the tab randomly
+	# cat=plugin.tx_jftabulatorsitemap/typo/020; type=int; label=Opened tab: Define the opened tab. Zero will close the tab at beginning
+	tabOpen = 1
+
+	# cat=plugin.tx_jftabulatorsitemap/typo/030; type=boolean; label=Open random tab: Opens the tab randomly
 	tabRandomTab = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/030; type=boolean; label=FX height: Use the height effect to change the tab panel
+	# cat=plugin.tx_jftabulatorsitemap/typo/040; type=boolean; label=FX height: Use the height effect to change the tab panel
 	tabFxHeight = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/040; type=boolean; label=FX opacity: Use the opacity effect to change the tab panel
+	# cat=plugin.tx_jftabulatorsitemap/typo/050; type=boolean; label=FX opacity: Use the opacity effect to change the tab panel
 	tabFxOpacity = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/050; type=string; label=FX duration: Define the animation speed for changing tab panel
+	# cat=plugin.tx_jftabulatorsitemap/typo/060; type=string; label=FX duration: Define the animation speed for changing tab panel
 	tabFxDuration = normal
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/060; type=boolean; label=Cache enabled: Use cache for ajax requests
+	# cat=plugin.tx_jftabulatorsitemap/typo/070; type=boolean; label=Cache enabled: Use cache for ajax requests
 	tabCache = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/070; type=boolean; label=Preload tabs: Preload all tabs at document ready
+	# cat=plugin.tx_jftabulatorsitemap/typo/080; type=boolean; label=Preload tabs: Preload all tabs at document ready
 	tabPreload = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/080; type=boolean; label=Show Spinner in Tab: If set, the spinner will be displayed in tab while loading
+	# cat=plugin.tx_jftabulatorsitemap/typo/090; type=boolean; label=Show Spinner in Tab: If set, the spinner will be displayed in tab while loading
 	tabShowSpinner = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/090; type=boolean; label=Show Spinner in Panel: If set, the spinner will be displayed in panel while loading
+	# cat=plugin.tx_jftabulatorsitemap/typo/100; type=boolean; label=Show Spinner in Panel: If set, the spinner will be displayed in panel while loading
 	spinnerPanel = 0
 
-	# cat=plugin.tx_jftabulatorsitemap/typo/100; type=options[prepend,html,append]; label=Spinnerposition in Panel: Defines the jQuery method to display the spinner in panel. Possible values are 'prepend', 'html' and 'append'
+	# cat=plugin.tx_jftabulatorsitemap/typo/110; type=options[prepend,html,append]; label=Spinnerposition in Panel: Defines the jQuery method to display the spinner in panel. Possible values are 'prepend', 'html' and 'append'
 	spinnerPanelPosition = prepend
 
 

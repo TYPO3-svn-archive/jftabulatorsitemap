@@ -7,17 +7,16 @@ jQuery(document).ready(function(){
 		###OPTIONS###
 	});
 	<!-- ###PANEL_SPINNER### begin -->
+	jQuery("####KEY### .tab-loading").remove();
 	jQuery('####KEY###').bind("tabsshow", function(event, ui) {
 		jQuery(".tab-loading").remove();
 	});
 	jQuery('####KEY###').bind("tabsselect", function(event, ui) {
-		var $panel = jQuery(ui.panel);
-		var $tab = jQuery('####KEY###');
-		if ($panel.is(":empty")) {
-			var idPrefix = $tab.tabs('option', 'idPrefix');
-			var selected = $tab.tabs('option', 'selected') + 1;
-			var spinner  = $tab.tabs("option", "spinnerPanel");
-			jQuery('#' + idPrefix + selected).###SPINNER_PANEL_POSITION###('<div class="tab-loading">' + spinner + '</div>')
+		if (this.id == jQuery(ui.panel).parent().attr('id')) {
+			if (jQuery(ui.panel).is(":empty")) {
+				var spinner  = jQuery('####KEY###').tabs("option", "spinnerPanel");
+				jQuery('####KEY###').children('.ui-tabs-panel').###SPINNER_PANEL_POSITION###('<span class="tab-loading">' + spinner + '</span>');
+			}
 		}
 	});
 	<!-- ###PANEL_SPINNER### begin -->

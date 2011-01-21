@@ -125,6 +125,8 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		}
 		if ($this->conf['tabRandomTab']) {
 			$options['selected'] = "selected: Math.floor(Math.random()*".count($menuItems_level1).")";
+		} elseif (is_numeric($this->conf['tabOpen'])) {
+			$options['selected'] = "selected: ".(($this->conf['tabOpen'] > count($menuItems_level1) ? count($menuItems_level1) : $this->conf['tabOpen']) - 1);
 		}
 		if ($this->conf['tabCache']) {
 			$options['cache'] = "cache: true";
@@ -157,6 +159,10 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			$options['ajaxOptions'] = "ajaxOptions: {async: false}";
 			$options['spinnerPanel'] = "spinnerPanel: '".$spinner."'";
 			$spinnerPanel = trim($this->cObj->getSubpart($templateCode, "###PANEL_SPINNER###"));
+			if ($this->conf['spinnerPanelPosition'] == 'html') {
+				// cache is not permitted (results in empty panel)
+				$options['cache'] = "cache: false";
+			}
 		}
 		$templateCode = $this->cObj->substituteSubpart($templateCode, '###PANEL_SPINNER###', $spinnerPanel, 0);
 

@@ -61,7 +61,7 @@ class tx_jftabulatorsitemap_tsparserext
 		}
 
 		$out .= '
-<div style="position:absolute;top:10px;right:10px; width:300px;">
+<div style="position:absolute; top:10px; right:10px; width:300px;">
 	' . $checkConfig . '
 </div>';
 
@@ -77,6 +77,7 @@ class tx_jftabulatorsitemap_tsparserext
 	{
 		$confDefault = array(
 			'frontendErrorMsg',
+			'useSelectInsteadCheckbox',
 		);
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jftabulatorsitemap']);
 		foreach ($confDefault as $val) {

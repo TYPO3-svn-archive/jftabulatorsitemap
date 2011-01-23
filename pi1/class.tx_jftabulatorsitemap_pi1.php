@@ -67,12 +67,63 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		// define the key of the element
 		$this->contentKey = "jftabulatorsitemap_c" . $this->cObj->data['uid'];
 
+		// Read the flexform if list_type is set
+		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
+			// It's a content, all data from flexform
+			// Set the Flexform information
+			$this->pi_initPIflexForm();
+			$piFlexForm = $this->cObj->data['pi_flexform'];
+			foreach ($piFlexForm['data'] as $sheet => $data) {
+				foreach ($data as $lang => $value) {
+					foreach ($value as $key => $val) {
+						if (! isset($this->lConf[$key])) {
+							$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
+						}
+					}
+				}
+			}
+			// tab
+			if ($this->lConf['tabCollapsible'] < 2) {
+				$this->conf['tabCollapsible'] = $this->lConf['tabCollapsible'];
+			}
+			if ($this->lConf['tabFxHeight'] < 2) {
+				$this->conf['tabFxHeight'] = $this->lConf['tabFxHeight'];
+			}
+			if ($this->lConf['tabFxOpacity'] < 2) {
+				$this->conf['tabFxOpacity'] = $this->lConf['tabFxOpacity'];
+			}
+			if ($this->lConf['tabFxDuration'] > 0) {
+				$this->conf['tabFxDuration'] = $this->lConf['tabFxDuration'];
+			}
+			if ($this->lConf['tabOpen'] > 0) {
+				$this->conf['tabOpen'] = $this->lConf['tabOpen'];
+			}
+			if ($this->lConf['tabRandomTab'] < 2) {
+				$this->conf['tabRandomTab'] = $this->lConf['tabRandomTab'];
+			}
+			if ($this->lConf['tabCache'] < 2) {
+				$this->conf['tabCache'] = $this->lConf['tabCache'];
+			}
+			if ($this->lConf['tabPreload'] < 2) {
+				$this->conf['tabPreload'] = $this->lConf['tabPreload'];
+			}
+			if ($this->lConf['tabShowSpinner'] < 2) {
+				$this->conf['tabShowSpinner'] = $this->lConf['tabShowSpinner'];
+			}
+			if ($this->lConf['spinnerPanel'] < 2) {
+				$this->conf['spinnerPanel'] = $this->lConf['spinnerPanel'];
+			}
+			if ($this->lConf['spinnerPanelPosition']) {
+				$this->conf['spinnerPanelPosition'] = $this->lConf['spinnerPanelPosition'];
+			}
+		}
+
 		// The template for JS
 		if (! $this->templateFileJS = $this->cObj->fileResource($this->conf['templateFileJS'])) {
 			$this->templateFileJS = $this->cObj->fileResource("EXT:jftabulatorsitemap/res/tx_jftabulatorsitemap_pi1.js");
 		}
 
-		$menuPid = intval($this->cObj->data['pages'] ? $this->cObj->data['pages'] : $GLOBALS['TSFE']->id);
+		$menuPids = t3lib_div::trimExplode(",", $this->cObj->data['pages'] ? $this->cObj->data['pages'] : intval($GLOBALS['TSFE']->id), 1);
 
 		// define the select hidden / nav_hide
 		$select = array();
@@ -83,17 +134,19 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		if (count($doktypes) > 0) {
 			$select[] = 'AND doktype IN ('.implode(',', $doktypes).')';
 		}
-		$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
-
-		reset($menuItems_level1);
-
 		$items = null;
-		while(list($uid, $pages_row) = each($menuItems_level1)) {
-			$GLOBALS['TSFE']->register['key']    = $this->contentKey;
-			$GLOBALS['TSFE']->register['uid']    = $pages_row['uid'];
-			$GLOBALS['TSFE']->register['target'] = $pages_row['target'];
-			$item   = trim($this->cObj->cObjGetSingle($this->conf['tabItem'], $this->conf['tabItem.']));
-			$items .= $this->cObj->stdWrap($item, $this->conf['tabWrap.']);
+		if (count($menuPids) > 0) {
+			foreach ($menuPids as $menuPid) {
+				$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
+				reset($menuItems_level1);
+				while(list($uid, $pages_row) = each($menuItems_level1)) {
+					$GLOBALS['TSFE']->register['key']    = $this->contentKey;
+					$GLOBALS['TSFE']->register['uid']    = $pages_row['uid'];
+					$GLOBALS['TSFE']->register['target'] = $pages_row['target'];
+					$item   = trim($this->cObj->cObjGetSingle($this->conf['tabItem'], $this->conf['tabItem.']));
+					$items .= $this->cObj->stdWrap($item, $this->conf['tabWrap.']);
+				}
+			}
 		}
 		$content = $this->cObj->stdWrap($items, $this->conf['stdWrap.']);
 
@@ -420,7 +473,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 }
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jftabulatorsitemap/pi1/class.tx_jftabulatorsitemap_pi1.php'])	{
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jftabulatorsitemap/pi1/class.tx_jftabulatorsitemap_pi1.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/jftabulatorsitemap/pi1/class.tx_jftabulatorsitemap_pi1.php']);
 }
 

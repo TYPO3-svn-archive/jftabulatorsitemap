@@ -7,11 +7,30 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tt_content.menu_type_pi1">Tabulator Sitemap</label>
-			<label index="spinner_text">Loading...</label>
-		</languageKey>
-		<languageKey index="de" type="array">
-			<label index="tt_content.menu_type_pi1">Tabulator Sitemap</label>
-			<label index="spinner_text">Laden...</label>
+			<label index="tt_content.tx_jftabulatorsitemap.sheet_general">General</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabCollapsible">Collapsible</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxHeight">FX height</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxOpacity">FX opacity</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxDuration">FX duration</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxDuration.I.0">Default (Normal)</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxDuration.I.1">Slow</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxDuration.I.2">Normal</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabFxDuration.I.3">Fast</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabOpen">Opened content</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabRandomTab">Open random tab</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabCache">Enable cache</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabPreload">Preload all panels</label>
+			<label index="tt_content.tx_jftabulatorsitemap.sheet_spinner">Spinner</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabShowSpinner">Show spinner in tabs</label>
+			<label index="tt_content.tx_jftabulatorsitemap.spinnerPanel">Show spinner in panel</label>
+			<label index="tt_content.tx_jftabulatorsitemap.spinnerPanelPosition">Position of the spinner (panel)</label>
+			<label index="tt_content.tx_jftabulatorsitemap.spinnerPanelPosition.I.1">Prepend</label>
+			<label index="tt_content.tx_jftabulatorsitemap.spinnerPanelPosition.I.2">Override</label>
+			<label index="tt_content.tx_jftabulatorsitemap.spinnerPanelPosition.I.3">Append</label>
+
+			<label index="tt_content.pi_flexform.from_ts">From Typoscript</label>
+			<label index="tt_content.pi_flexform.no">No</label>
+			<label index="tt_content.pi_flexform.yes">Yes</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">

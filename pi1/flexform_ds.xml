@@ -1,0 +1,211 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<general>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.sheet_general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<tabCollapsible>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabCollapsible</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabCollapsible>
+					<tabOpen>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabOpen</label>
+							<config>
+								<type>input</type>
+								<size>2</size>
+								<max>2</max>
+								<default></default>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
+							</config>
+						</TCEforms>
+					</tabOpen>
+					<tabRandomTab>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabRandomTab</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabRandomTab>
+					<tabFxHeight>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxHeight</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabFxHeight>
+					<tabFxOpacity>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxOpacity</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabFxOpacity>
+					<tabFxDuration>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxDuration</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxDuration.I.1</numIndex>
+										<numIndex index="1">slow</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxDuration.I.2</numIndex>
+										<numIndex index="1">normal</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxDuration.I.3</numIndex>
+										<numIndex index="1">fast</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</tabFxDuration>
+					<tabCache>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabCache</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabCache>
+					<tabPreload>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabPreload</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabPreload>
+				</el>
+			</ROOT>
+		</general>
+		<spinner>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.sheet_spinner</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<tabShowSpinner>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabShowSpinner</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</tabShowSpinner>
+					<spinnerPanel>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanel</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</spinnerPanel>
+					<spinnerPanelPosition>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanelPosition</label>
+							<config>
+								<type>select</type>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.pi_flexform.from_ts</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanelPosition.I.1</numIndex>
+										<numIndex index="1">prepend</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanelPosition.I.2</numIndex>
+										<numIndex index="1">html</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanelPosition.I.3</numIndex>
+										<numIndex index="1">append</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</spinnerPanelPosition>
+				</el>
+			</ROOT>
+		</spinner>
+<!--
+		<autoplay>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.sheet_autoplay</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<delayDuration>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.autoplayDuration</label>
+							<config>
+								<type>input</type>
+								<size>6</size>
+								<max>6</max>
+								<default></default>
+								<checkbox>0</checkbox>
+								<eval>int</eval>
+							</config>
+						</TCEforms>
+					</delayDuration>
+					<autoplayContinuing>
+						<TCEforms>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.autoplayContinuing</label>
+							<config>
+								<form_type>user</form_type>
+								<userFunc><![CDATA[EXT:jftabulatorsitemap/lib/class.tx_jftabulatorsitemap_tceFunc.php:&tx_jftabulatorsitemap_tceFunc->getCheckbox]]></userFunc>
+								<checked>0</checked>
+							</config>
+						</TCEforms>
+					</autoplayContinuing>
+				</el>
+			</ROOT>
+		</autoplay>
+-->
+	</sheets>
+</T3DataStructure>

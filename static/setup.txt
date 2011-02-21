@@ -7,6 +7,8 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	cssMinify = {$plugin.tx_jftabulatorsitemap_pi1.cssMinify}
 	showNavHidePages = {$plugin.tx_jftabulatorsitemap_pi1.showNavHidePages}
 	showDoktypes = {$plugin.tx_jftabulatorsitemap_pi1.showDoktypes}
+	usePageTitleForID = {$plugin.tx_jftabulatorsitemap_pi1.usePageTitleForID}
+	spaceCharacter = {$plugin.tx_jftabulatorsitemap_pi1.spaceCharacter}
 
 	templateFileJS = {$plugin.tx_jftabulatorsitemap_pi1.file.templateFileJS}
 	jQueryLibrary = {$plugin.tx_jftabulatorsitemap_pi1.file.jQueryLibrary}
@@ -38,6 +40,8 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabItem {
 		typolink {
 			parameter.dataWrap = {register:uid},{$plugin.tx_jftabulatorsitemap_pi1.typeNum}
+			ATagParams.dataWrap = title="{register:uniquetitle}"
+			ATagParams.if.isTrue = {$plugin.tx_jftabulatorsitemap_pi1.usePageTitleForID}
 			ATagBeforeWrap = 1
 			wrap = <span> | </span>
 		}

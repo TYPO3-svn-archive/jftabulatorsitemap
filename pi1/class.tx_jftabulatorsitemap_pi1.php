@@ -135,14 +135,18 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			$select[] = 'AND doktype IN ('.implode(',', $doktypes).')';
 		}
 		$items = null;
+		$itemName = array();
 		if (count($menuPids) > 0) {
 			foreach ($menuPids as $menuPid) {
 				$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
 				reset($menuItems_level1);
 				while(list($uid, $pages_row) = each($menuItems_level1)) {
-					$GLOBALS['TSFE']->register['key']    = $this->contentKey;
-					$GLOBALS['TSFE']->register['uid']    = $pages_row['uid'];
-					$GLOBALS['TSFE']->register['target'] = $pages_row['target'];
+					$newId = $this->cleanTitel($pages_row['title'], $itemName, 0);
+					$itemName[] = $newId;
+					$GLOBALS['TSFE']->register['key']          = $this->contentKey;
+					$GLOBALS['TSFE']->register['uid']          = $pages_row['uid'];
+					$GLOBALS['TSFE']->register['target']       = $pages_row['target'];
+					$GLOBALS['TSFE']->register['uniquetitle']  = $newId;
 					$item   = trim($this->cObj->cObjGetSingle($this->conf['tabItem'], $this->conf['tabItem.']));
 					$items .= $this->cObj->stdWrap($item, $this->conf['tabWrap.']);
 				}
@@ -238,6 +242,52 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		$this->addResources();
 
 		return $this->pi_wrapInBaseClass($content);
+	}
+
+	/**
+	 * Cleans a string from spaces and check its unique in a given array
+	 * @param string  $title
+	 * @param string  $spaceCharacter
+	 * @param array   $itemsArray
+	 * @param integer $iterator
+	 * @return string
+	 */
+	private function cleanTitel($title='', $itemsArray=array(), $iterator=0)
+	{
+		// add the iterator when set
+		if ($iterator > 0) {
+			$title .= ' '.$iterator;
+		}
+
+		// Fetch character set:
+		$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] ? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : $GLOBALS['TSFE']->defaultCharSet;
+
+		// Convert to lowercase:
+		$processedTitle = $GLOBALS['TSFE']->csConvObj->conv_case($charset, $title, 'toLower');
+
+		// Strip tags
+		$processedTitle = strip_tags($processedTitle);
+
+		// Convert some special tokens to the space character
+		$space = (isset($this->conf['spaceCharacter']) ? $this->conf['spaceCharacter'] : '-');
+		$processedTitle = preg_replace('/[ \-+_]+/', $space, $processedTitle); // convert spaces
+
+		// Convert extended letters to ascii equivalents
+		$processedTitle = $GLOBALS['TSFE']->csConvObj->specCharsToASCII($charset, $processedTitle);
+
+		// Strip the rest
+		if ($space) {
+			$processedTitle = preg_replace('/[^a-zA-Z0-9\\' . $space . ']/', '', $processedTitle);
+			$processedTitle = preg_replace('/\\' . $space . '{2,}/', $space, $processedTitle); // Convert multiple 'spaces' to a single one
+		}
+		$processedTitle = trim($processedTitle, $space);
+
+		// check if the string is allready in use
+		if (in_array($processedTitle, $itemsArray)) {
+			return $this->cleanTitel($title, $itemsArray, $iterator+1);
+		} else {
+			return strtolower($processedTitle);
+		}
 	}
 
 	/**

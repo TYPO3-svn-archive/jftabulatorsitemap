@@ -24,13 +24,19 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	# cat=plugin.tx_jftabulatorsitemap/enable/080; type=string; label=Show doctypes: Comma separated list with all allowed doctypes (1=Standard, 2=Advanced, 3=External URL, 4=Shortcut, 5=Not in menu, 6=Backend User Section, 199=Spacer, 254=SysFolder, 255=Recycler)
 	showDoktypes = 1,2
 
+	# cat=plugin.tx_jftabulatorsitemap/enable/090; type=boolean; label=Use page title for ID: If set, the page title will be used to generate the id of the panels
+	usePageTitleForID  = 0
+
+	# cat=plugin.tx_jftabulatorsitemap/enable/100; type=string; label=Space caracter: Defines the space caracter to used if usePageTitleForID is active
+	spaceCharacter = -
+
 
 
 	# cat=plugin.tx_jftabulatorsitemap/file/010; type=file[js]; label=JS-Template file: Location of the used template for JS
 	file.templateFileJS = EXT:jftabulatorsitemap/res/tx_jftabulatorsitemap_pi1.js
 
 	# cat=plugin.tx_jftabulatorsitemap/file/020; type=file[js]; label=jQuery Library: Location of the jQuery Lib
-	file.jQueryLibrary = EXT:jftabulatorsitemap/res/jquery/js/jquery-1.4.4.min.js
+	file.jQueryLibrary = EXT:jftabulatorsitemap/res/jquery/js/jquery-1.5.0.min.js
 
 	# cat=plugin.tx_jftabulatorsitemap/file/030; type=file[js]; label=jQuery Easing: Location of the jQuery Easing
 	file.jQueryEasing = EXT:jftabulatorsitemap/res/jquery/js/jquery.easing-1.3.js

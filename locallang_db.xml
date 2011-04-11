@@ -20,6 +20,7 @@
 			<label index="tt_content.tx_jftabulatorsitemap.tabRandomTab">Open random tab</label>
 			<label index="tt_content.tx_jftabulatorsitemap.tabCache">Enable cache</label>
 			<label index="tt_content.tx_jftabulatorsitemap.tabPreload">Preload all panels</label>
+			<label index="tt_content.tx_jftabulatorsitemap.tabTitles">Overwrite titles (One title per line)</label>
 			<label index="tt_content.tx_jftabulatorsitemap.sheet_spinner">Spinner</label>
 			<label index="tt_content.tx_jftabulatorsitemap.tabShowSpinner">Show spinner in tabs</label>
 			<label index="tt_content.tx_jftabulatorsitemap.spinnerPanel">Show spinner in panel</label>

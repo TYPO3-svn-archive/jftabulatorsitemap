@@ -38,6 +38,9 @@ plugin.tx_jftabulatorsitemap_pi1 {
 
 	tabItem = TEXT
 	tabItem {
+		data = register:titles
+		listNum.data = register:SITE_NUM_CURRENT
+		listNum.splitChar = 10
 		typolink {
 			parameter.dataWrap = {register:uid},{$plugin.tx_jftabulatorsitemap_pi1.typeNum}
 			ATagParams.dataWrap = title="{register:uniquetitle}"

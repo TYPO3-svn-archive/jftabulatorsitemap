@@ -50,7 +50,7 @@ class tx_jftabulatorsitemap_tsparserext
 		}
 
 		$checkConfig = null;
-		if ($this->checkConfig() === false) {
+		if ($this->checkConfig() === FALSE) {
 			$checkConfig = '
 	<div class="typo3-message message-warning">
 		<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:jftabulatorsitemap/locallang.xml:extmng.classInnerHeader') . '</div>
@@ -82,10 +82,10 @@ class tx_jftabulatorsitemap_tsparserext
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jftabulatorsitemap']);
 		foreach ($confDefault as $val) {
 			if (! isset($confArr[$val]) && ! isset($_POST['data'][$val])) {
-				return false;
+				return FALSE;
 			}
 		}
-		return true;
+		return TRUE;
 	}
 }
 

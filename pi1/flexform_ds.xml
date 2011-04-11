@@ -12,6 +12,7 @@
 				<el>
 					<tabCollapsible>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabCollapsible</label>
 							<config>
 								<form_type>user</form_type>
@@ -22,6 +23,7 @@
 					</tabCollapsible>
 					<tabOpen>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabOpen</label>
 							<config>
 								<type>input</type>
@@ -35,6 +37,7 @@
 					</tabOpen>
 					<tabRandomTab>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabRandomTab</label>
 							<config>
 								<form_type>user</form_type>
@@ -45,6 +48,7 @@
 					</tabRandomTab>
 					<tabFxHeight>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxHeight</label>
 							<config>
 								<form_type>user</form_type>
@@ -55,6 +59,7 @@
 					</tabFxHeight>
 					<tabFxOpacity>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxOpacity</label>
 							<config>
 								<form_type>user</form_type>
@@ -65,6 +70,7 @@
 					</tabFxOpacity>
 					<tabFxDuration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabFxDuration</label>
 							<config>
 								<type>select</type>
@@ -93,6 +99,7 @@
 					</tabFxDuration>
 					<tabCache>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabCache</label>
 							<config>
 								<form_type>user</form_type>
@@ -103,6 +110,7 @@
 					</tabCache>
 					<tabPreload>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabPreload</label>
 							<config>
 								<form_type>user</form_type>
@@ -111,6 +119,18 @@
 							</config>
 						</TCEforms>
 					</tabPreload>
+					<tabTitles>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabTitles</label>
+							<config>
+								<type>text</type>
+								<wrap>OFF</wrap>
+								<cols>48</cols>
+								<rows>6</rows>
+							</config>
+						</TCEforms>
+					</tabTitles>
 				</el>
 			</ROOT>
 		</general>
@@ -123,6 +143,7 @@
 				<el>
 					<tabShowSpinner>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.tabShowSpinner</label>
 							<config>
 								<form_type>user</form_type>
@@ -133,6 +154,7 @@
 					</tabShowSpinner>
 					<spinnerPanel>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanel</label>
 							<config>
 								<form_type>user</form_type>
@@ -143,6 +165,7 @@
 					</spinnerPanel>
 					<spinnerPanelPosition>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.spinnerPanelPosition</label>
 							<config>
 								<type>select</type>
@@ -182,6 +205,7 @@
 				<el>
 					<delayDuration>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.autoplayDuration</label>
 							<config>
 								<type>input</type>
@@ -195,6 +219,7 @@
 					</delayDuration>
 					<autoplayContinuing>
 						<TCEforms>
+							<exclude>1</exclude>
 							<label>LLL:EXT:jftabulatorsitemap/locallang_db.xml:tt_content.tx_jftabulatorsitemap.autoplayContinuing</label>
 							<config>
 								<form_type>user</form_type>

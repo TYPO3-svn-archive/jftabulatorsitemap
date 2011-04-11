@@ -45,7 +45,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	public $prefixId      = 'tx_jftabulatorsitemap_pi1';		// Same as class name
 	public $scriptRelPath = 'pi1/class.tx_jftabulatorsitemap_pi1.php';	// Path to this script relative to the extension dir.
 	public $extKey        = 'jftabulatorsitemap';	// The extension key.
-	public $pi_checkCHash = true;
+	public $pi_checkCHash = TRUE;
 	private $contentKey = null;
 	private $templateFileJS = null;
 	private $jsFiles = array();
@@ -116,6 +116,9 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			if ($this->lConf['spinnerPanelPosition']) {
 				$this->conf['spinnerPanelPosition'] = $this->lConf['spinnerPanelPosition'];
 			}
+			if ($this->lConf['tabTitles']) {
+				$this->conf['tabTitles'] = $this->lConf['tabTitles'];
+			}
 		}
 
 		// The template for JS
@@ -130,12 +133,13 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		if (! $this->conf['showNavHidePages']) {
 			$select[] = 'AND nav_hide=0';
 		}
-		$doktypes = t3lib_div::intExplode(',', $this->conf['showDoktypes'], true);
+		$doktypes = t3lib_div::intExplode(',', $this->conf['showDoktypes'], TRUE);
 		if (count($doktypes) > 0) {
 			$select[] = 'AND doktype IN ('.implode(',', $doktypes).')';
 		}
 		$items = null;
 		$itemName = array();
+		$current = 0;
 		if (count($menuPids) > 0) {
 			foreach ($menuPids as $menuPid) {
 				$menuItems_level1 = $GLOBALS['TSFE']->sys_page->getMenu($menuPid, '*', 'sorting', implode(" ", $select), 1);
@@ -143,12 +147,15 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 				while(list($uid, $pages_row) = each($menuItems_level1)) {
 					$newId = $this->cleanTitel($pages_row['title'], $itemName, 0);
 					$itemName[] = $newId;
-					$GLOBALS['TSFE']->register['key']          = $this->contentKey;
-					$GLOBALS['TSFE']->register['uid']          = $pages_row['uid'];
-					$GLOBALS['TSFE']->register['target']       = $pages_row['target'];
-					$GLOBALS['TSFE']->register['uniquetitle']  = $newId;
+					$GLOBALS['TSFE']->register['key']              = $this->contentKey;
+					$GLOBALS['TSFE']->register['uid']              = $pages_row['uid'];
+					$GLOBALS['TSFE']->register['target']           = $pages_row['target'];
+					$GLOBALS['TSFE']->register['uniquetitle']      = $newId;
+					$GLOBALS['TSFE']->register['titles']           = $this->conf['tabTitles'];
+					$GLOBALS['TSFE']->register['SITE_NUM_CURRENT'] = $current;
 					$item   = trim($this->cObj->cObjGetSingle($this->conf['tabItem'], $this->conf['tabItem.']));
 					$items .= $this->cObj->stdWrap($item, $this->conf['tabWrap.']);
+					$current ++;
 				}
 			}
 		}
@@ -199,7 +206,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		$markerArray = array();
 		// get the template
 		if (! $templateCode = trim($this->cObj->getSubpart($this->templateFileJS, "###TEMPLATE_TAB_JS###"))) {
-			$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", true);
+			$templateCode = $this->outputError("Template TEMPLATE_TAB_JS is missing", TRUE);
 		}
 
 		// TAB_PRELOAD
@@ -298,10 +305,10 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	private function addResources()
 	{
 		// checks if t3jquery is loaded
-		if (T3JQUERY === true) {
+		if (T3JQUERY === TRUE) {
 			tx_t3jquery::addJqJS();
 		} else {
-			$this->addJsFile($this->conf['jQueryLibrary'], true);
+			$this->addJsFile($this->conf['jQueryLibrary'], TRUE);
 			$this->addJsFile($this->conf['jQueryUI']);
 		}
 		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
@@ -309,14 +316,14 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		}
 		// Fix moveJsFromHeaderToFooter (add all scripts to the footer)
 		if ($GLOBALS['TSFE']->config['config']['moveJsFromHeaderToFooter']) {
-			$allJsInFooter = true;
+			$allJsInFooter = TRUE;
 		} else {
-			$allJsInFooter = false;
+			$allJsInFooter = FALSE;
 		}
 		// add all defined JS files
 		if (count($this->jsFiles) > 0) {
 			foreach ($this->jsFiles as $jsToLoad) {
-				if (T3JQUERY === true) {
+				if (T3JQUERY === TRUE) {
 					$conf = array(
 						'jsfile' => $jsToLoad,
 						'tofooter' => ($this->conf['jsInFooter'] || $allJsInFooter),
@@ -353,7 +360,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			}
 			$conf = array();
 			$conf['jsdata'] = $temp_js;
-			if (T3JQUERY === true && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
+			if (T3JQUERY === TRUE && t3lib_div::int_from_ver($this->getExtensionVersion('t3jquery')) >= 1002000) {
 				$conf['tofooter'] = ($this->conf['jsInFooter'] || $allJsInFooter);
 				$conf['jsminify'] = $this->conf['jsMinify'];
 				$conf['jsinline'] = $this->conf['jsInline'];
@@ -374,9 +381,9 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 						$temp_js = t3lib_div::minifyJavaScript($temp_js);
 					}
 					if ($this->conf['jsInFooter'] || $allJsInFooter) {
-						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+						$GLOBALS['TSFE']->additionalFooterData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, TRUE);
 					} else {
-						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, true);
+						$GLOBALS['TSFE']->additionalHeaderData['js_'.$this->extKey.'_'.$hash] = t3lib_div::wrapJS($temp_js, TRUE);
 					}
 				}
 			}
@@ -430,10 +437,10 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	 * @param boolean $first
 	 * @return void
 	 */
-	private function addJsFile($script="", $first=false)
+	private function addJsFile($script="", $first=FALSE)
 	{
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
-			if ($first === true) {
+			if ($first === TRUE) {
 				$this->jsFiles = array_merge(array($script), $this->jsFiles);
 			} else {
 				$this->jsFiles[] = $script;
@@ -502,7 +509,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	 * @param boolean $js
 	 * @return string
 	 */
-	private function outputError($msg='', $js=false)
+	private function outputError($msg='', $js=FALSE)
 	{
 		t3lib_div::devLog($msg, $this->extKey, 3);
 		if ($this->confArr['frontendErrorMsg'] || ! isset($this->confArr['frontendErrorMsg'])) {
@@ -513,7 +520,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 	}
 
 	/**
-	 * Returns true, if the request comes via AJAX
+	 * Returns TRUE, if the request comes via AJAX
 	 * @return boolean
 	 */
 	private function isAjax()

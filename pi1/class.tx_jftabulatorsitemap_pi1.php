@@ -42,9 +42,9 @@ if (t3lib_extMgm::isLoaded('t3jquery')) {
  */
 class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 {
-	public $prefixId      = 'tx_jftabulatorsitemap_pi1';		// Same as class name
-	public $scriptRelPath = 'pi1/class.tx_jftabulatorsitemap_pi1.php';	// Path to this script relative to the extension dir.
-	public $extKey        = 'jftabulatorsitemap';	// The extension key.
+	public $prefixId      = 'tx_jftabulatorsitemap_pi1';
+	public $scriptRelPath = 'pi1/class.tx_jftabulatorsitemap_pi1.php';
+	public $extKey        = 'jftabulatorsitemap';
 	public $pi_checkCHash = TRUE;
 	private $contentKey = null;
 	private $templateFileJS = null;
@@ -69,19 +69,23 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 
 		// Read the flexform if list_type is set
 		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
+
 			// It's a content, all data from flexform
-			// Set the Flexform information
-			$this->pi_initPIflexForm();
-			$piFlexForm = $this->cObj->data['pi_flexform'];
-			foreach ($piFlexForm['data'] as $sheet => $data) {
-				foreach ($data as $lang => $value) {
-					foreach ($value as $key => $val) {
-						if (! isset($this->lConf[$key])) {
-							$this->lConf[$key] = $this->pi_getFFvalue($piFlexForm, $key, $sheet);
-						}
-					}
-				}
-			}
+
+			$this->lConf['tabCollapsible'] = $this->getFlexformData('general', 'tabCollapsible');
+			$this->lConf['tabOpen']        = $this->getFlexformData('general', 'tabOpen');
+			$this->lConf['tabRandomTab']   = $this->getFlexformData('general', 'tabRandomTab');
+			$this->lConf['tabFxHeight']    = $this->getFlexformData('general', 'tabFxHeight');
+			$this->lConf['tabFxOpacity']   = $this->getFlexformData('general', 'tabFxOpacity');
+			$this->lConf['tabFxDuration']  = $this->getFlexformData('general', 'tabFxDuration');
+			$this->lConf['tabCache']       = $this->getFlexformData('general', 'tabCache');
+			$this->lConf['tabPreload']     = $this->getFlexformData('general', 'tabPreload');
+			$this->lConf['tabTitles']      = $this->getFlexformData('general', 'tabTitles');
+
+			$this->lConf['tabShowSpinner']       = $this->getFlexformData('spinner', 'tabShowSpinner');
+			$this->lConf['spinnerPanel']         = $this->getFlexformData('spinner', 'spinnerPanel');
+			$this->lConf['spinnerPanelPosition'] = $this->getFlexformData('spinner', 'spinnerPanelPosition');
+
 			// tab
 			if ($this->lConf['tabCollapsible'] < 2) {
 				$this->conf['tabCollapsible'] = $this->lConf['tabCollapsible'];
@@ -502,6 +506,41 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		return $EM_CONF[$key]['version'];
 	}
 
+	/**
+	 * Extract the requested information from flexform
+	 * @param string $sheet
+	 * @param string $name
+	 * @param boolean $devlog
+	 * @return string
+	 */
+	protected function getFlexformData($sheet='', $name='', $devlog=true)
+	{
+		$this->pi_initPIflexForm();
+		$piFlexForm = $this->cObj->data['pi_flexform'];
+		if (! isset($piFlexForm['data'])) {
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform Data not set", $this->extKey, 1);
+			}
+			return null;
+		}
+		if (! isset($piFlexForm['data'][$sheet])) {
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform sheet '{$sheet}' not defined", $this->extKey, 1);
+			}
+			return null;
+		}
+		if (! isset($piFlexForm['data'][$sheet]['lDEF'][$name])) {
+			if ($devlog === true) {
+				t3lib_div::devLog("Flexform Data [{$sheet}][{$name}] does not exist", $this->extKey, 1);
+			}
+			return null;
+		}
+		if (isset($piFlexForm['data'][$sheet]['lDEF'][$name]['vDEF'])) {
+			return $this->pi_getFFvalue($piFlexForm, $name, $sheet);
+		} else {
+			return $piFlexForm['data'][$sheet]['lDEF'][$name];
+		}
+	}
 
 	/**
 	 * Return a errormessage if needed

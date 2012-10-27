@@ -19,20 +19,17 @@ plugin.tx_jftabulatorsitemap_pi1 {
 	tabCollapsible = {$plugin.tx_jftabulatorsitemap_pi1.tabCollapsible}
 	tabOpen = {$plugin.tx_jftabulatorsitemap_pi1.tabOpen}
 	tabRandomTab = {$plugin.tx_jftabulatorsitemap_pi1.tabRandomTab}
-	tabFxHeight = {$plugin.tx_jftabulatorsitemap_pi1.tabFxHeight}
-	tabFxOpacity = {$plugin.tx_jftabulatorsitemap_pi1.tabFxOpacity}
-	tabFxDuration = {$plugin.tx_jftabulatorsitemap_pi1.tabFxDuration}
+	tabEvent = {$plugin.tx_jftabulatorsitemap_pi1.tabEvent}
+	tabHideEffect = {$plugin.tx_jftabulatorsitemap_pi1.tabHideEffect}
+	tabHideTransition = {$plugin.tx_jftabulatorsitemap_pi1.tabHideTransition}
+	tabHideTransitiondir = {$plugin.tx_jftabulatorsitemap_pi1.tabHideTransitiondir}
+	tabHideTransitionduration = {$plugin.tx_jftabulatorsitemap_pi1.tabHideTransitionduration}
+	tabShowEffect = {$plugin.tx_jftabulatorsitemap_pi1.tabShowEffect}
+	tabShowTransition = {$plugin.tx_jftabulatorsitemap_pi1.tabShowTransition}
+	tabShowTransitiondir = {$plugin.tx_jftabulatorsitemap_pi1.tabShowTransitiondir}
+	tabShowTransitionduration = {$plugin.tx_jftabulatorsitemap_pi1.tabShowTransitionduration}
 	tabCache = {$plugin.tx_jftabulatorsitemap_pi1.tabCache}
 	tabPreload = {$plugin.tx_jftabulatorsitemap_pi1.tabPreload}
-
-	tabShowSpinner = {$plugin.tx_jftabulatorsitemap_pi1.tabShowSpinner}
-	tabSpinner = TEXT
-	tabSpinner {
-		data = LLL:EXT:jftabulatorsitemap/pi1/locallang.xml:spinner_text
-		wrap = <em> | </em>
-	}
-	spinnerPanel = {$plugin.tx_jftabulatorsitemap_pi1.spinnerPanel}
-	spinnerPanelPosition = {$plugin.tx_jftabulatorsitemap_pi1.spinnerPanelPosition}
 
 	scrollSpeed = {$plugin.tx_jftabulatorsitemap_pi1.scrollSpeed}
 
@@ -46,7 +43,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 			ATagParams.dataWrap = title="{register:uniquetitle}"
 			ATagParams.if.isTrue = {$plugin.tx_jftabulatorsitemap_pi1.usePageTitleForID}
 			ATagBeforeWrap = 1
-			wrap = <span> | </span>
+			wrap = |
 		}
 	}
 	tabWrap {

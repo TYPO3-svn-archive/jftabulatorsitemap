@@ -69,36 +69,31 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		$this->contentKey = "jftabulatorsitemap_c" . $this->cObj->data['uid'];
 
 		// Read the flexform if list_type is set
-		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1') {
+		if ($this->cObj->data['list_type'] == $this->extKey.'_pi1' && $this->cObj->data['CType'] == 'list') {
 
 			// It's a content, all data from flexform
 
 			$this->lConf['tabCollapsible'] = $this->getFlexformData('general', 'tabCollapsible');
 			$this->lConf['tabOpen']        = $this->getFlexformData('general', 'tabOpen');
 			$this->lConf['tabRandomTab']   = $this->getFlexformData('general', 'tabRandomTab');
-			$this->lConf['tabFxHeight']    = $this->getFlexformData('general', 'tabFxHeight');
-			$this->lConf['tabFxOpacity']   = $this->getFlexformData('general', 'tabFxOpacity');
-			$this->lConf['tabFxDuration']  = $this->getFlexformData('general', 'tabFxDuration');
 			$this->lConf['tabCache']       = $this->getFlexformData('general', 'tabCache');
 			$this->lConf['tabPreload']     = $this->getFlexformData('general', 'tabPreload');
 			$this->lConf['tabTitles']      = $this->getFlexformData('general', 'tabTitles');
 
-			$this->lConf['tabShowSpinner']       = $this->getFlexformData('spinner', 'tabShowSpinner');
-			$this->lConf['spinnerPanel']         = $this->getFlexformData('spinner', 'spinnerPanel');
-			$this->lConf['spinnerPanelPosition'] = $this->getFlexformData('spinner', 'spinnerPanelPosition');
+			$this->lConf['tabEvent']         = $this->getFlexformData('general', 'tabEvent');
+
+			$this->lConf['tabHideEffect']             = $this->getFlexformData('general', 'tabHideEffect');
+			$this->lConf['tabHideTransition']         = $this->getFlexformData('general', 'tabHideTransition');
+			$this->lConf['tabHideTransitiondir']      = $this->getFlexformData('general', 'tabHideTransitiondir');
+			$this->lConf['tabHideTransitionduration'] = $this->getFlexformData('general', 'tabHideTransitionduration');
+			$this->lConf['tabShowEffect']             = $this->getFlexformData('general', 'tabShowEffect');
+			$this->lConf['tabShowTransition']         = $this->getFlexformData('general', 'tabShowTransition');
+			$this->lConf['tabShowTransitiondir']      = $this->getFlexformData('general', 'tabShowTransitiondir');
+			$this->lConf['tabShowTransitionduration'] = $this->getFlexformData('general', 'tabShowTransitionduration');
 
 			// tab
 			if ($this->lConf['tabCollapsible'] < 2) {
 				$this->conf['tabCollapsible'] = $this->lConf['tabCollapsible'];
-			}
-			if ($this->lConf['tabFxHeight'] < 2) {
-				$this->conf['tabFxHeight'] = $this->lConf['tabFxHeight'];
-			}
-			if ($this->lConf['tabFxOpacity'] < 2) {
-				$this->conf['tabFxOpacity'] = $this->lConf['tabFxOpacity'];
-			}
-			if ($this->lConf['tabFxDuration'] > 0) {
-				$this->conf['tabFxDuration'] = $this->lConf['tabFxDuration'];
 			}
 			if ($this->lConf['tabOpen'] > 0) {
 				$this->conf['tabOpen'] = $this->lConf['tabOpen'];
@@ -109,17 +104,36 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			if ($this->lConf['tabCache'] < 2) {
 				$this->conf['tabCache'] = $this->lConf['tabCache'];
 			}
+			if (in_array($this->lConf['tabEvent'], array('click', 'mouseover'))) {
+				$this->conf['tabEvent'] = $this->lConf['tabEvent'];
+			}
+			if ($this->lConf['tabHideEffect']) {
+				$this->conf['tabHideEffect'] = $this->lConf['tabHideEffect'];
+			}
+			if ($this->lConf['tabHideTransition']) {
+				$this->conf['tabHideTransition'] = $this->lConf['tabHideTransition'];
+			}
+			if ($this->lConf['tabHideTransitiondir']) {
+				$this->conf['tabHideTransitiondir'] = $this->lConf['tabHideTransitiondir'];
+			}
+			if ($this->lConf['tabHideTransitionduration'] > 0) {
+				$this->conf['tabHideTransitionduration'] = $this->lConf['tabHideTransitionduration'];
+			}
+			if ($this->lConf['tabShowEffect']) {
+				$this->conf['tabShowEffect'] = $this->lConf['tabShowEffect'];
+			}
+			if ($this->lConf['tabShowTransition']) {
+				$this->conf['tabShowTransition'] = $this->lConf['tabShowTransition'];
+			}
+			if ($this->lConf['tabShowTransitiondir']) {
+				$this->conf['tabShowTransitiondir'] = $this->lConf['tabShowTransitiondir'];
+			}
+			if ($this->lConf['tabShowTransitionduration'] > 0) {
+				$this->conf['tabShowTransitionduration'] = $this->lConf['tabShowTransitionduration'];
+			}
+
 			if ($this->lConf['tabPreload'] < 2) {
 				$this->conf['tabPreload'] = $this->lConf['tabPreload'];
-			}
-			if ($this->lConf['tabShowSpinner'] < 2) {
-				$this->conf['tabShowSpinner'] = $this->lConf['tabShowSpinner'];
-			}
-			if ($this->lConf['spinnerPanel'] < 2) {
-				$this->conf['spinnerPanel'] = $this->lConf['spinnerPanel'];
-			}
-			if ($this->lConf['spinnerPanelPosition']) {
-				$this->conf['spinnerPanelPosition'] = $this->lConf['spinnerPanelPosition'];
 			}
 			if ($this->lConf['tabTitles']) {
 				$this->conf['tabTitles'] = $this->lConf['tabTitles'];
@@ -173,38 +187,56 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 			$jQueryNoConflict = "";
 		}
 
-		// Set FX for tab
-		$fx = array();
-		if ($this->conf['tabFxHeight']) {
-			$fx[] = "height: 'toggle'";
-		}
-		if ($this->conf['tabFxOpacity']) {
-			$fx[] = "opacity: 'toggle'";
-		}
-		if ($this->conf['tabFxDuration'] || is_numeric($this->conf['tabFxDuration'])) {
-			$fx[] = "duration: ".(is_numeric($this->conf['tabFxDuration']) ? $this->conf['tabFxDuration'] : "'{$this->conf['tabFxDuration']}'");
-		}
 		// Set options for tab
 		$options = array();
-		if (count($fx) > 0) {
-			$options[] = "fx: {".implode(",", $fx)."}";
+		if ($this->conf['tabHideEffect'] == 'none') {
+			$options['hide'] = "hide:false";
+		} elseif ($this->conf['tabHideEffect']) {
+			$fx = array();
+			$fx[] = "effect:'{$this->conf['tabHideEffect']}'";
+			if (is_numeric($this->conf['tabHideTransitionduration'])) {
+				$fx[] = "duration:'{$this->conf['tabHideTransitionduration']}'";
+			}
+			if ($this->conf['tabHideTransition']) {
+				$fx[] = "easing:'".(in_array($this->conf['tabHideTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['tabHideTransitiondir']}")."{$this->conf['tabHideTransition']}'";
+			}
+			$options['hide'] = "hide:{".implode(',', $fx)."}";
+		}
+
+		if ($this->conf['tabShowEffect'] == 'none') {
+			$options['show'] = "show:false";
+		} elseif ($this->conf['tabShowEffect']) {
+			$fx = array();
+			$fx[] = "effect:'{$this->conf['tabShowEffect']}'";
+			if (is_numeric($this->conf['tabShowTransitionduration'])) {
+				$fx[] = "duration:'{$this->conf['tabShowTransitionduration']}'";
+			}
+			if ($this->conf['tabShowTransition']) {
+				$fx[] = "easing:'".(in_array($this->conf['tabShowTransition'], array("swing", "linear")) ? "" : "ease{$this->conf['tabShowTransitiondir']}")."{$this->conf['tabShowTransition']}'";
+			}
+			$options['show'] = "show:{".implode(',', $fx)."}";
 		}
 		if ($this->conf['tabCollapsible']) {
-			$options['collapsible'] = "collapsible: true";
+			$options['collapsible'] = "collapsible:true";
 		}
 		if ($this->conf['tabRandomTab']) {
-			$options['selected'] = "selected: Math.floor(Math.random()*".count($menuItems_level1).")";
+			$options['active'] = "active: Math.floor(Math.random()*".count($menuItems_level1).")";
 		} elseif (is_numeric($this->conf['tabOpen'])) {
-			$options['selected'] = "selected: ".(($this->conf['tabOpen'] > count($menuItems_level1) ? count($menuItems_level1) : $this->conf['tabOpen']) - 1);
+			$options['active'] = "active: ".(($this->conf['tabOpen'] > count($menuItems_level1) ? count($menuItems_level1) : $this->conf['tabOpen']) - 1);
 		}
-		if ($this->conf['tabCache']) {
-			$options['cache'] = "cache: true";
+		if (in_array($this->conf['tabEvent'], array('click', 'mouseover'))) {
+			$options['event'] = "event:'{$this->conf['tabEvent']}'";
 		}
-		$spinner = t3lib_div::slashJS(trim($this->cObj->cObjGetSingle($this->conf['tabSpinner'], $this->conf['tabSpinner.'])));
-		if ($this->conf['tabShowSpinner']) {
-			$options['spinner'] = "spinner: '".$spinner."'";
-		} else {
-			$options['spinner'] = "spinner: ''";
+		$beforeLoad = NULL;
+		if ($this->conf['tabCache'] || $this->conf['tabPreload']) {
+			$beforeLoad .= "
+			if (ui.tab.data('loaded')) {
+				event.preventDefault();
+				return;
+			}
+			ui.jqXHR.success(function() {
+				ui.tab.data('loaded', true );
+			});";
 		}
 
 		// get the Template of the Javascript
@@ -217,28 +249,21 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 		// TAB_PRELOAD
 		$tabPreload = null;
 		if ($this->conf['tabPreload']) {
-			$options['ajaxOptions'] = "ajaxOptions: {async: false}";
+			$beforeLoad .= "
+			ui.ajaxSettings.async = false;";
 			$tabPreload = trim($this->cObj->getSubpart($templateCode, "###TAB_PRELOAD###"));
 		}
 		$templateCode = $this->cObj->substituteSubpart($templateCode, '###TAB_PRELOAD###', $tabPreload, 0);
 
-		// PANEL_SPINNER
-		$spinnerPanel = null;
-		if ($this->conf['spinnerPanel']) {
-			$options['ajaxOptions'] = "ajaxOptions: {async: false}";
-			$options['spinnerPanel'] = "spinnerPanel: '".$spinner."'";
-			$spinnerPanel = trim($this->cObj->getSubpart($templateCode, "###PANEL_SPINNER###"));
-			if ($this->conf['spinnerPanelPosition'] == 'html') {
-				// cache is not permitted (results in empty panel)
-				$options['cache'] = "cache: false";
-			}
+		if ($beforeLoad) {
+			$options['beforeLoad'] = "
+		beforeLoad: function( event, ui ) {".$beforeLoad."
+		}";
 		}
-		$templateCode = $this->cObj->substituteSubpart($templateCode, '###PANEL_SPINNER###', $spinnerPanel, 0);
-
+		
 		// Replace default values
 		$markerArray["KEY"]     = $this->contentKey;
 		$markerArray["OPTIONS"] = implode(", ", $options);
-		$markerArray["SPINNER_PANEL_POSITION"] = ($this->conf['spinnerPanelPosition'] ? $this->conf['spinnerPanelPosition'] : 'prepend');
 		$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 
 		$this->addCssFile($this->conf['jQueryUIstyle']);

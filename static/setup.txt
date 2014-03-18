@@ -50,7 +50,7 @@ plugin.tx_jftabulatorsitemap_pi1 {
 		dataWrap = <li> | </li>
 		required = 1
 	}
-	stdWrap {
+	tabsWrap {
 		dataWrap = <div id="{register:key}"><ul> | </ul></div>
 		required = 1
 	}

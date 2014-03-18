@@ -27,7 +27,6 @@
  * Hint: use extdeveval to insert/update function index above.
  */
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
 
 if (t3lib_extMgm::isLoaded('t3jquery')) {
 	require_once(t3lib_extMgm::extPath('t3jquery').'class.tx_t3jquery.php');
@@ -178,7 +177,7 @@ class tx_jftabulatorsitemap_pi1 extends tslib_pibase
 				}
 			}
 		}
-		$content = $this->cObj->stdWrap($items, $this->conf['stdWrap.']);
+		$content = $this->cObj->stdWrap($items, $this->conf['tabsWrap.']);
 
 		// define the jQuery mode and function
 		if ($this->conf['jQueryNoConflict']) {
